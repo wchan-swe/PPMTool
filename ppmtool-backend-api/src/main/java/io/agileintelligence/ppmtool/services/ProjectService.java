@@ -21,4 +21,15 @@ public class ProjectService {
             throw new ProjectIdException(String.format("Project ID %s already exists", project.getProjectIdentifier()));
         }
     }
+
+    public Project findProjectByIdentifier(String projectId) {
+        // don't need try catch here there's no exceptions to be caught need if statement to throw exception
+        Project project = projectRepository.findByProjectIdentifier(projectId.toUpperCase());
+
+        if (project == null) {
+            throw new ProjectIdException(String.format("Project ID %s does not exist", projectId));
+        }
+
+        return project;
+    }
 }
